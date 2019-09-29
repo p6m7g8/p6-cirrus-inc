@@ -1,3 +1,19 @@
+######################################################################
+#<
+#
+# Function:
+#      = p6_cirrus_inc_instance_create(name, ami_id, instance_type, user_data, subnet_type)
+#
+# Arg(s):
+#    name - 
+#    ami_id - 
+#    instance_type - 
+#    user_data - 
+#    subnet_type - 
+#
+#
+#>
+######################################################################
 p6_cirrus_inc_instance_create() {
     local name="$1"
     local ami_id="$2"
@@ -36,21 +52,61 @@ p6_cirrus_inc_instance_create() {
 	--tag-specifications "'ResourceType=instance,Tags=[{Key=Name,Value=$name}]'"
 }
 
+######################################################################
+#<
+#
+# Function:
+#      = p6_cirrus_inc_instance_ubuntu18_create()
+#
+#
+#
+#>
+######################################################################
 p6_cirrus_inc_instance_ubuntu18_create() {
 
     p6_cirrus_inc_instance_create "ubuntu18"
 }
 
+######################################################################
+#<
+#
+# Function:
+#      = p6_cirrus_inc_instance_rhel8_create()
+#
+#
+#
+#>
+######################################################################
 p6_cirrus_inc_instance_rhel8_create() {
 
     p6_cirrus_inc_instance_create "rhel-8"
 }
 
+######################################################################
+#<
+#
+# Function:
+#      = p6_cirrus_inc_instance_amazon_create()
+#
+#
+#
+#>
+######################################################################
 p6_cirrus_inc_instance_amazon_create() {
 
     p6_cirrus_inc_instance_create "amazon2"
 }
 
+######################################################################
+#<
+#
+# Function:
+#      = p6_cirrus_inc_cleanup()
+#
+#
+#
+#>
+######################################################################
 p6_cirrus_inc_cleanup() {
 
     true
@@ -58,6 +114,20 @@ p6_cirrus_inc_cleanup() {
     ## delete sgs
 }
 
+######################################################################
+#<
+#
+# Function:
+#     str = p6_cirrus_inc_sg_bastion_ssh_create(vpc_id)
+#
+# Arg(s):
+#    vpc_id - 
+#
+# Return(s):
+#     - 
+#
+#>
+######################################################################
 p6_cirrus_inc_sg_bastion_ssh_create() {
     local vpc_id=${1:-$AWS_VPC}
 
@@ -68,6 +138,20 @@ p6_cirrus_inc_sg_bastion_ssh_create() {
     p6_return $sg_bastion_ssh_id
 }
 
+######################################################################
+#<
+#
+# Function:
+#     str = p6_cirrus_inc_sg_instance_ssh_create(vpc_id)
+#
+# Arg(s):
+#    vpc_id - 
+#
+# Return(s):
+#     - 
+#
+#>
+######################################################################
 p6_cirrus_inc_sg_instance_ssh_create() {
     local vpc_id=${1:-$AWS_VPC}
 
@@ -78,6 +162,20 @@ p6_cirrus_inc_sg_instance_ssh_create() {
     p6_return $sg_instance_ssh_id
 }
 
+######################################################################
+#<
+#
+# Function:
+#     str = p6_cirrus_inc_sg_outbound_ssh_create(vpc_id)
+#
+# Arg(s):
+#    vpc_id - 
+#
+# Return(s):
+#     - 
+#
+#>
+######################################################################
 p6_cirrus_inc_sg_outbound_ssh_create() {
     local vpc_id=${1:-$AWS_VPC}
 
@@ -88,6 +186,16 @@ p6_cirrus_inc_sg_outbound_ssh_create() {
     p6_return $sg_outbound_id
 }
 
+######################################################################
+#<
+#
+# Function:
+#      = p6_cirrus_inc_sg_link_outbound_world_world()
+#
+#
+#
+#>
+######################################################################
 p6_cirrus_inc_sg_link_outbound_world_world() {
 
     local sg_outbound_id=$(p6_cirrus_inc_sg_id_from_group_name "outbound")
@@ -95,6 +203,16 @@ p6_cirrus_inc_sg_link_outbound_world_world() {
     p6_aws_ec2_security_group_egress_authorize $sg_outbound_id --protocol tcp --port 0 --cidr 0.0.0.0/0
 }
 
+######################################################################
+#<
+#
+# Function:
+#      = p6_cirrus_inc_sg_link_bastion_world_ssh()
+#
+#
+#
+#>
+######################################################################
 p6_cirrus_inc_sg_link_bastion_world_ssh() {
 
     local sg_bastion_ssh_id=$(p6_cirrus_inc_sg_id_from_group_name "bastion-ssh")
@@ -102,6 +220,16 @@ p6_cirrus_inc_sg_link_bastion_world_ssh() {
 }
 
 ## Links: a_b_proto
+######################################################################
+#<
+#
+# Function:
+#      = p6_cirrus_inc_sg_link_bastion_vpc_ssh()
+#
+#
+#
+#>
+######################################################################
 p6_cirrus_inc_sg_link_bastion_vpc_ssh() {
 
     local sg_bastion_ssh_id=$(p6_cirrus_inc_sg_id_from_group_name "bastion-ssh")
@@ -117,17 +245,47 @@ p6_cirrus_inc_sg_link_bastion_vpc_ssh() {
     p6_aws_ec2_security_group_egress_authorize $sg_bastion_ssh_id --protocol tcp --port 22 --source-group $sg_instance_ssh_id
 }
 
+######################################################################
+#<
+#
+# Function:
+#      = p6_cirrus_inc_instance_bastion_create()
+#
+#
+#
+#>
+######################################################################
 p6_cirrus_inc_instance_bastion_create() {
 
     p6_cirrus_inc_instance_create "bastion"
 }
 
+######################################################################
+#<
+#
+# Function:
+#      = p6_cirrus_inc_instance_irc_create()
+#
+#
+#
+#>
+######################################################################
 p6_cirrus_inc_instance_irc_create() {
 
     local ami_id=$(p6_cirrus_inc_amis_freebsd12_latest)
     p6_cirrus_inc_instance_create "irc" "$ami_id" "t2.micro"
 }
 
+######################################################################
+#<
+#
+# Function:
+#      = p6_cirrus_inc_instance_jenkins_create()
+#
+#
+#
+#>
+######################################################################
 p6_cirrus_inc_instance_jenkins_create() {
 
     local ami_id=$(p6_cirrus_inc_amis_freebsd12_latest)
