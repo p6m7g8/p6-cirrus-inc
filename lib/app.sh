@@ -135,7 +135,7 @@ p6_cirrus_inc_sg_bastion_ssh_create() {
 
     p6_aws_ec2_tags_create "$sg_bastion_ssh_id" "Key=Name,Value=bastion-ssh"
 
-    p6_return $sg_bastion_ssh_id
+    p6_return_str "$sg_bastion_ssh_id"
 }
 
 ######################################################################
@@ -159,7 +159,7 @@ p6_cirrus_inc_sg_instance_ssh_create() {
 
     p6_aws_ec2_tags_create "$sg_instance_ssh_id" "Key=Name,Value=vpc-ssh"
 
-    p6_return $sg_instance_ssh_id
+    p6_return_str "$sg_instance_ssh_id"
 }
 
 ######################################################################
@@ -183,7 +183,7 @@ p6_cirrus_inc_sg_outbound_ssh_create() {
 
     p6_aws_ec2_tags_create "$sg_outbound" "Key=Name,Value=outbound"
 
-    p6_return $sg_outbound_id
+    p6_return_str "$sg_outbound_id"
 }
 
 ######################################################################
