@@ -1,16 +1,14 @@
 ######################################################################
 #<
 #
-# Function:
-#      = p6_cirrus_inc_instance_create(name, ami_id, instance_type, user_data, subnet_type)
+# Function: p6_cirrus_inc_instance_create(name, ami_id, [instance_type=t3a.nano], [user_data=], [subnet_type=infra])
 #
-# Arg(s):
-#    name -
-#    ami_id -
-#    instance_type -
-#    user_data -
-#    subnet_type -
-#
+#  Args:
+#	name - 
+#	ami_id - 
+#	OPTIONAL instance_type -  [t3a.nano]
+#	OPTIONAL user_data -  []
+#	OPTIONAL subnet_type -  [infra]
 #
 #>
 ######################################################################
@@ -55,10 +53,7 @@ p6_cirrus_inc_instance_create() {
 ######################################################################
 #<
 #
-# Function:
-#      = p6_cirrus_inc_instance_ubuntu18_create()
-#
-#
+# Function: p6_cirrus_inc_instance_ubuntu18_create()
 #
 #>
 ######################################################################
@@ -70,10 +65,7 @@ p6_cirrus_inc_instance_ubuntu18_create() {
 ######################################################################
 #<
 #
-# Function:
-#      = p6_cirrus_inc_instance_rhel8_create()
-#
-#
+# Function: p6_cirrus_inc_instance_rhel8_create()
 #
 #>
 ######################################################################
@@ -85,10 +77,7 @@ p6_cirrus_inc_instance_rhel8_create() {
 ######################################################################
 #<
 #
-# Function:
-#      = p6_cirrus_inc_instance_amazon_create()
-#
-#
+# Function: p6_cirrus_inc_instance_amazon_create()
 #
 #>
 ######################################################################
@@ -100,10 +89,7 @@ p6_cirrus_inc_instance_amazon_create() {
 ######################################################################
 #<
 #
-# Function:
-#      = p6_cirrus_inc_cleanup()
-#
-#
+# Function: p6_cirrus_inc_cleanup()
 #
 #>
 ######################################################################
@@ -117,14 +103,13 @@ p6_cirrus_inc_cleanup() {
 ######################################################################
 #<
 #
-# Function:
-#     str = p6_cirrus_inc_sg_bastion_ssh_create(vpc_id)
+# Function: str sg_bastion_ssh_id = p6_cirrus_inc_sg_bastion_ssh_create([vpc_id=$AWS_VPC])
 #
-# Arg(s):
-#    vpc_id -
+#  Args:
+#	OPTIONAL vpc_id -  [$AWS_VPC]
 #
-# Return(s):
-#     -
+#  Returns:
+#	str - sg_bastion_ssh_id
 #
 #>
 ######################################################################
@@ -141,14 +126,13 @@ p6_cirrus_inc_sg_bastion_ssh_create() {
 ######################################################################
 #<
 #
-# Function:
-#     str = p6_cirrus_inc_sg_instance_ssh_create(vpc_id)
+# Function: str sg_instance_ssh_id = p6_cirrus_inc_sg_instance_ssh_create([vpc_id=$AWS_VPC])
 #
-# Arg(s):
-#    vpc_id -
+#  Args:
+#	OPTIONAL vpc_id -  [$AWS_VPC]
 #
-# Return(s):
-#     -
+#  Returns:
+#	str - sg_instance_ssh_id
 #
 #>
 ######################################################################
@@ -165,14 +149,13 @@ p6_cirrus_inc_sg_instance_ssh_create() {
 ######################################################################
 #<
 #
-# Function:
-#     str = p6_cirrus_inc_sg_outbound_ssh_create(vpc_id)
+# Function: str sg_outbound_id = p6_cirrus_inc_sg_outbound_ssh_create([vpc_id=$AWS_VPC])
 #
-# Arg(s):
-#    vpc_id -
+#  Args:
+#	OPTIONAL vpc_id -  [$AWS_VPC]
 #
-# Return(s):
-#     -
+#  Returns:
+#	str - sg_outbound_id
 #
 #>
 ######################################################################
@@ -189,10 +172,7 @@ p6_cirrus_inc_sg_outbound_ssh_create() {
 ######################################################################
 #<
 #
-# Function:
-#      = p6_cirrus_inc_sg_link_outbound_world_world()
-#
-#
+# Function: p6_cirrus_inc_sg_link_outbound_world_world()
 #
 #>
 ######################################################################
@@ -206,10 +186,7 @@ p6_cirrus_inc_sg_link_outbound_world_world() {
 ######################################################################
 #<
 #
-# Function:
-#      = p6_cirrus_inc_sg_link_bastion_world_ssh()
-#
-#
+# Function: p6_cirrus_inc_sg_link_bastion_world_ssh()
 #
 #>
 ######################################################################
@@ -223,10 +200,7 @@ p6_cirrus_inc_sg_link_bastion_world_ssh() {
 ######################################################################
 #<
 #
-# Function:
-#      = p6_cirrus_inc_sg_link_bastion_vpc_ssh()
-#
-#
+# Function: p6_cirrus_inc_sg_link_bastion_vpc_ssh()
 #
 #>
 ######################################################################
@@ -248,10 +222,7 @@ p6_cirrus_inc_sg_link_bastion_vpc_ssh() {
 ######################################################################
 #<
 #
-# Function:
-#      = p6_cirrus_inc_instance_bastion_create()
-#
-#
+# Function: p6_cirrus_inc_instance_bastion_create()
 #
 #>
 ######################################################################
@@ -263,10 +234,7 @@ p6_cirrus_inc_instance_bastion_create() {
 ######################################################################
 #<
 #
-# Function:
-#      = p6_cirrus_inc_instance_irc_create()
-#
-#
+# Function: p6_cirrus_inc_instance_irc_create()
 #
 #>
 ######################################################################
@@ -279,10 +247,7 @@ p6_cirrus_inc_instance_irc_create() {
 ######################################################################
 #<
 #
-# Function:
-#      = p6_cirrus_inc_instance_jenkins_create()
-#
-#
+# Function: p6_cirrus_inc_instance_jenkins_create()
 #
 #>
 ######################################################################
@@ -299,9 +264,9 @@ p6_cirrus_inc_instance_jenkins_create() {
 # Function: str key_id = p6_aws_kms_svc_key_make(account_id, key_description, key_alias)
 #
 #  Args:
-#	account_id -
-#	key_description -
-#	key_alias -
+#	account_id - 
+#	key_description - 
+#	key_alias - 
 #
 #  Returns:
 #	str - key_id
