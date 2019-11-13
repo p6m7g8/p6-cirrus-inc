@@ -5,11 +5,11 @@
 #      = p6_cirrus_inc_instance_create(name, ami_id, instance_type, user_data, subnet_type)
 #
 # Arg(s):
-#    name - 
-#    ami_id - 
-#    instance_type - 
-#    user_data - 
-#    subnet_type - 
+#    name -
+#    ami_id -
+#    instance_type -
+#    user_data -
+#    subnet_type -
 #
 #
 #>
@@ -121,10 +121,10 @@ p6_cirrus_inc_cleanup() {
 #     str = p6_cirrus_inc_sg_bastion_ssh_create(vpc_id)
 #
 # Arg(s):
-#    vpc_id - 
+#    vpc_id -
 #
 # Return(s):
-#     - 
+#     -
 #
 #>
 ######################################################################
@@ -145,10 +145,10 @@ p6_cirrus_inc_sg_bastion_ssh_create() {
 #     str = p6_cirrus_inc_sg_instance_ssh_create(vpc_id)
 #
 # Arg(s):
-#    vpc_id - 
+#    vpc_id -
 #
 # Return(s):
-#     - 
+#     -
 #
 #>
 ######################################################################
@@ -169,10 +169,10 @@ p6_cirrus_inc_sg_instance_ssh_create() {
 #     str = p6_cirrus_inc_sg_outbound_ssh_create(vpc_id)
 #
 # Arg(s):
-#    vpc_id - 
+#    vpc_id -
 #
 # Return(s):
-#     - 
+#     -
 #
 #>
 ######################################################################
@@ -290,4 +290,36 @@ p6_cirrus_inc_instance_jenkins_create() {
 
     local ami_id=$(p6_cirrus_inc_amis_freebsd12_latest)
     p6_cirrus_inc_instance_create "jenkins" "$ami_id" "m4.large"
+}
+
+
+######################################################################
+#<
+#
+# Function: str key_id = p6_aws_kms_svc_key_make(account_id, key_description, key_alias)
+#
+#  Args:
+#	account_id -
+#	key_description -
+#	key_alias -
+#
+#  Returns:
+#	str - key_id
+#
+#>
+######################################################################
+p6_aws_kms_svc_key_make() {
+    local account_id="$1"
+    local key_description="$2"
+    local key_alias="$3"
+
+    local key_admin_principals="arn:aws:iam::${account_id}:role/SSO/SSO_Admin"
+    local key_user_principals="arn:aws:iam::${account_id}:role/SSO/SSO_Admin"
+
+    local key_policy=$(p6_aws_util_template_process "iam/kms" "ACCOUNT_ID=$account_id" "KEY_ADMIN_PRINCIPALS=$key_admin_principals" "KEY_USER_PRINCIPALS=$key_user_principals")
+
+    local key_id=$(p6_aws_cmd kms create-key "$key_description" "$key_policy")
+    p6_aws_cmd kms alias-key "$key_alias" "$key_id"
+
+    p6_return_str "$key_id"
 }
