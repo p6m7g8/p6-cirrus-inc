@@ -4,8 +4,8 @@
 # Function: p6_cirrus_inc_instance_create(name, ami_id, [instance_type=t3a.nano], [user_data=], [subnet_type=infra])
 #
 #  Args:
-#	name - 
-#	ami_id - 
+#	name -
+#	ami_id -
 #	OPTIONAL instance_type -  [t3a.nano]
 #	OPTIONAL user_data -  []
 #	OPTIONAL subnet_type -  [infra]
@@ -48,6 +48,16 @@ p6_cirrus_inc_instance_create() {
 	--subnet-id $subnet_id \
 	$user_data \
 	--tag-specifications "'ResourceType=instance,Tags=[{Key=Name,Value=$name}]'"
+}
+
+p6_cirrius_inc_sg_myself_allow() {
+    local sg_name="$1"
+    local port="${2:-443}"
+
+    local myip=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
+    local sg_id=$(p6_cirrus_inc_sg_id_from_group_name "$sg_name")
+    p6_aws_ec2_security_group_ingress_authorize --group-id $sg_id --protocol tcp --port $port --cidr $myip/32
 }
 
 ######################################################################
@@ -264,9 +274,9 @@ p6_cirrus_inc_instance_jenkins_create() {
 # Function: str key_id = p6_aws_kms_svc_key_make(account_id, key_description, key_alias)
 #
 #  Args:
-#	account_id - 
-#	key_description - 
-#	key_alias - 
+#	account_id -
+#	key_description -
+#	key_alias -
 #
 #  Returns:
 #	str - key_id
