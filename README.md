@@ -1,4 +1,10 @@
+### init.zsh:
+- p6df::modules::p6-cirrus-inc::deps()
+- p6df::modules::p6-cirrus-inc::init()
+- p6df::modules::p6-cirrus-inc::version()
+
 ### app.sh:
+- p6_cirrius_inc_sg_myself_allow(sg_name, [port=443])
 - p6_cirrus_inc_cleanup()
 - p6_cirrus_inc_instance_amazon_create()
 - p6_cirrus_inc_instance_bastion_create()

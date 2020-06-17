@@ -4,8 +4,8 @@
 # Function: p6_cirrus_inc_instance_create(name, ami_id, [instance_type=t3a.nano], [user_data=], [subnet_type=infra])
 #
 #  Args:
-#	name -
-#	ami_id -
+#	name - 
+#	ami_id - 
 #	OPTIONAL instance_type -  [t3a.nano]
 #	OPTIONAL user_data -  []
 #	OPTIONAL subnet_type -  [infra]
@@ -19,7 +19,7 @@ p6_cirrus_inc_instance_create() {
     local user_data="${4:-}"
     local subnet_type="${5:-infra}"
 
-    [ -z "$ami_id" ]    && ami_id=$(p6_cirrus_inc_amis_freebsd12_latest)
+    [ -z "$ami_id" ] && ami_id=$(p6_cirrus_inc_amis_freebsd12_latest)
     [ -n "$user_data" ] && user_data="--user-data=$user_data"
 
     local key_name=$(p6_cirrus_inc_key_pair_make "$USER")
@@ -27,29 +27,40 @@ p6_cirrus_inc_instance_create() {
     local sg_id
     local subnet_id
     case $name in
-	bastion)
-	    sg_id=$(p6_cirrus_inc_sg_id_from_group_name "bastion-ssh")
-	    subnet_id=$(p6_cirrus_inc_subnet_bastion_get)
-	    ;;
-	*)
-	    sg_id=$(p6_cirrus_inc_sg_id_from_group_name "vpc-ssh")
-	    subnet_id=$(p6_cirrus_inc_subnet_${subnet_type}_get)
-	    ;;
+    bastion)
+        sg_id=$(p6_cirrus_inc_sg_id_from_group_name "bastion-ssh")
+        subnet_id=$(p6_cirrus_inc_subnet_bastion_get)
+        ;;
+    *)
+        sg_id=$(p6_cirrus_inc_sg_id_from_group_name "vpc-ssh")
+        subnet_id=$(p6_cirrus_inc_subnet_${subnet_type}_get)
+        ;;
     esac
 
     local sg_outbound_id=$(p6_cirrus_inc_sg_id_from_group_name "outbound")
 
     p6_aws_ec2_instances_run \
-	--output json \
-	--key-name $key_name \
-	--image-id $ami_id \
-	--instance-type $instance_type \
-	--security-group-ids $sg_id $sg_outbound_id \
-	--subnet-id $subnet_id \
-	$user_data \
-	--tag-specifications "'ResourceType=instance,Tags=[{Key=Name,Value=$name}]'"
+        --output json \
+        --key-name $key_name \
+        --image-id $ami_id \
+        --instance-type $instance_type \
+        --security-group-ids $sg_id $sg_outbound_id \
+        --subnet-id $subnet_id \
+        $user_data \
+        --tag-specifications "'ResourceType=instance,Tags=[{Key=Name,Value=$name}]'"
 }
 
+######################################################################
+#<
+#
+# Function: p6_cirrius_inc_sg_myself_allow(sg_name, [port=443])
+#
+#  Args:
+#	sg_name - 
+#	OPTIONAL port -  [443]
+#
+#>
+######################################################################
 p6_cirrius_inc_sg_myself_allow() {
     local sg_name="$1"
     local port="${2:-443}"
@@ -267,16 +278,15 @@ p6_cirrus_inc_instance_jenkins_create() {
     p6_cirrus_inc_instance_create "jenkins" "$ami_id" "m4.large"
 }
 
-
 ######################################################################
 #<
 #
 # Function: str key_id = p6_aws_kms_svc_key_make(account_id, key_description, key_alias)
 #
 #  Args:
-#	account_id -
-#	key_description -
-#	key_alias -
+#	account_id - 
+#	key_description - 
+#	key_alias - 
 #
 #  Returns:
 #	str - key_id
