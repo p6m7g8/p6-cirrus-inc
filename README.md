@@ -1,7 +1,6 @@
 ### init.zsh:
 - p6df::modules::p6-cirrus-inc::deps()
 - p6df::modules::p6-cirrus-inc::init()
-- p6df::modules::p6-cirrus-inc::version()
 
 ### app.sh:
 - p6_cirrius_inc_sg_myself_allow(sg_name, [port=443])
