@@ -1,8 +1,49 @@
-### init.zsh:
+TAG LINE
+# .
+
+## Table of Contents
+
+
+### .
+- [.](#.)
+  - [Badges](#badges)
+  - [Distributions](#distributions)
+  - [Summary](#summary)
+  - [Contributing](#contributing)
+  - [Code of Conduct](#code-of-conduct)
+  - [Changes](#changes)
+    - [Usage](#usage)
+  - [Author](#author)
+
+### Badges
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/p6m7g8/.)
+[![Mergify](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/p6m7g8/./&style=flat)](https://mergify.io)
+
+## Summary
+
+## Contributing
+
+- [How to Contribute](CONTRIBUTING.md)
+
+## Code of Conduct
+
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+
+## Changes
+
+- [Change Log](CHANGELOG.md)
+
+### Usage
+
+#### init.zsh:
+
 - p6df::modules::p6-cirrus-inc::deps()
 - p6df::modules::p6-cirrus-inc::init()
 
-### app.sh:
+#### app.sh:
+
 - p6_cirrius_inc_sg_myself_allow(sg_name, [port=443])
 - p6_cirrus_inc_cleanup()
 - p6_cirrus_inc_instance_amazon_create()
@@ -20,3 +61,7 @@
 - str sg_instance_ssh_id = p6_cirrus_inc_sg_instance_ssh_create([vpc_id=$AWS_VPC])
 - str sg_outbound_id = p6_cirrus_inc_sg_outbound_ssh_create([vpc_id=$AWS_VPC])
 
+
+## Author
+
+Philip M . Gollucci <pgollucci@p6m7g8.com>
