@@ -4,11 +4,11 @@
 # Function: p6_cirrus_inc_instance_create(name, ami_id, [instance_type=t3a.nano], [user_data=], [subnet_type=infra])
 #
 #  Args:
-#	name - 
-#	ami_id - 
-#	OPTIONAL instance_type -  [t3a.nano]
-#	OPTIONAL user_data -  []
-#	OPTIONAL subnet_type -  [infra]
+#	name -
+#	ami_id -
+#	OPTIONAL instance_type - [t3a.nano]
+#	OPTIONAL user_data - []
+#	OPTIONAL subnet_type - [infra]
 #
 #>
 ######################################################################
@@ -56,8 +56,8 @@ p6_cirrus_inc_instance_create() {
 # Function: p6_cirrius_inc_sg_myself_allow(sg_name, [port=443])
 #
 #  Args:
-#	sg_name - 
-#	OPTIONAL port -  [443]
+#	sg_name -
+#	OPTIONAL port - [443]
 #
 #>
 ######################################################################
@@ -127,7 +127,7 @@ p6_cirrus_inc_cleanup() {
 # Function: str sg_bastion_ssh_id = p6_cirrus_inc_sg_bastion_ssh_create([vpc_id=$AWS_VPC])
 #
 #  Args:
-#	OPTIONAL vpc_id -  [$AWS_VPC]
+#	OPTIONAL vpc_id - [$AWS_VPC]
 #
 #  Returns:
 #	str - sg_bastion_ssh_id
@@ -150,7 +150,7 @@ p6_cirrus_inc_sg_bastion_ssh_create() {
 # Function: str sg_instance_ssh_id = p6_cirrus_inc_sg_instance_ssh_create([vpc_id=$AWS_VPC])
 #
 #  Args:
-#	OPTIONAL vpc_id -  [$AWS_VPC]
+#	OPTIONAL vpc_id - [$AWS_VPC]
 #
 #  Returns:
 #	str - sg_instance_ssh_id
@@ -173,7 +173,7 @@ p6_cirrus_inc_sg_instance_ssh_create() {
 # Function: str sg_outbound_id = p6_cirrus_inc_sg_outbound_ssh_create([vpc_id=$AWS_VPC])
 #
 #  Args:
-#	OPTIONAL vpc_id -  [$AWS_VPC]
+#	OPTIONAL vpc_id - [$AWS_VPC]
 #
 #  Returns:
 #	str - sg_outbound_id
@@ -284,9 +284,9 @@ p6_cirrus_inc_instance_jenkins_create() {
 # Function: str key_id = p6_aws_kms_svc_key_make(account_id, key_description, key_alias)
 #
 #  Args:
-#	account_id - 
-#	key_description - 
-#	key_alias - 
+#	account_id -
+#	key_description -
+#	key_alias -
 #
 #  Returns:
 #	str - key_id
