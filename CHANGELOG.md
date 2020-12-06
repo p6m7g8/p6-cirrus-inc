@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/p6m7g8/p6-cirrus-inc/compare/v2.0.0...v2.1.0) (2020-12-06)
+
+
+### Features
+
+* **api:** centralize ::version() ([68c05d6](https://github.com/p6m7g8/p6-cirrus-inc/commit/68c05d6607d9398e71d50be3ebab571f46c702e4))
+* **community:** adds CODE_OF_CONDUCT ([bcc350a](https://github.com/p6m7g8/p6-cirrus-inc/commit/bcc350a370adec2607bfbbe88ab835add129cf88))
+* **github:** adds ISSUE_TEMPLATEs ([826d278](https://github.com/p6m7g8/p6-cirrus-inc/commit/826d2789a13868b2bd3f57fc8483a28a583cef53))
+* **mergify:** re-gens ([9d8b292](https://github.com/p6m7g8/p6-cirrus-inc/commit/9d8b2926047e62e66955db7edc28312ce332d957))
+
+
+* **docs:** fixes whitespace ([4a07c1f](https://github.com/p6m7g8/p6-cirrus-inc/commit/4a07c1f4e388217777e448f5b598c47c756be26f))
+* **README:** updates to template v2.0 ([bcc852b](https://github.com/p6m7g8/p6-cirrus-inc/commit/bcc852b0a1c5023d5be1fcc02ced86177a195cb2))
+* **semantic:** no longer needed, defaults are fine ([69d13f3](https://github.com/p6m7g8/p6-cirrus-inc/commit/69d13f39e8cda7e1494c185ef75a1e0b7d57f1f5))
+
 ## [2.0.0](https://github.com/p6m7g8/p6-cirrus-inc/compare/v1.0.1...v2.0.0) (2020-10-11)
 
 ### 1.0.1 (2020-09-20)
