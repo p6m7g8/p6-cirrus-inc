@@ -1,13 +1,13 @@
 ######################################################################
 #<
 #
-# Function: p6_cirrus_elb_create(elb_name, [listeners=http], [subnet_type=Public], [vpc_id=$AWS_VPC])
+# Function: p6_cirrus_elb_create(elb_name, [listeners=http], [subnet_type=Public], [vpc_id=$AWS_VPC_ID])
 #
 #  Args:
 #	elb_name -
 #	OPTIONAL listeners - [http]
 #	OPTIONAL subnet_type - [Public]
-#	OPTIONAL vpc_id - [$AWS_VPC]
+#	OPTIONAL vpc_id - [$AWS_VPC_ID]
 #
 #>
 ######################################################################
@@ -15,7 +15,7 @@ p6_cirrus_elb_create() {
     local elb_name="$1"
     local listeners="${2:-http}"
     local subnet_type="${3:-Public}"
-    local vpc_id="${4:-$AWS_VPC}"
+    local vpc_id="${4:-$AWS_VPC_ID}"
 
     local subnet_ids=$(p6_cirrus_ec2_subnet_ids_get "$subnet_type" "$vpc_id" | xargs)
 

@@ -21,10 +21,10 @@ p6_cirrus_sg_myself_allow() {
 ######################################################################
 #<
 #
-# Function: str sg_bastion_ssh_id = p6_cirrus_sg_bastion_ssh_create([vpc_id=$AWS_VPC])
+# Function: str sg_bastion_ssh_id = p6_cirrus_sg_bastion_ssh_create([vpc_id=$AWS_VPC_ID])
 #
 #  Args:
-#	OPTIONAL vpc_id - [$AWS_VPC]
+#	OPTIONAL vpc_id - [$AWS_VPC_ID]
 #
 #  Returns:
 #	str - sg_bastion_ssh_id
@@ -32,7 +32,7 @@ p6_cirrus_sg_myself_allow() {
 #>
 ######################################################################
 p6_cirrus_sg_bastion_ssh_create() {
-    local vpc_id=${1:-$AWS_VPC}
+    local vpc_id=${1:-$AWS_VPC_ID}
 
     local sg_bastion_ssh_id=$(p6_aws_ec2_security_group_create "'Allows SSH TPC(22) Inbound From Anywhere'" "bastion-ssh" --vpc-id $vpc_id --output text)
 
@@ -44,10 +44,10 @@ p6_cirrus_sg_bastion_ssh_create() {
 ######################################################################
 #<
 #
-# Function: str sg_instance_ssh_id = p6_cirrus_sg_instance_ssh_create([vpc_id=$AWS_VPC])
+# Function: str sg_instance_ssh_id = p6_cirrus_sg_instance_ssh_create([vpc_id=$AWS_VPC_ID])
 #
 #  Args:
-#	OPTIONAL vpc_id - [$AWS_VPC]
+#	OPTIONAL vpc_id - [$AWS_VPC_ID]
 #
 #  Returns:
 #	str - sg_instance_ssh_id
@@ -55,7 +55,7 @@ p6_cirrus_sg_bastion_ssh_create() {
 #>
 ######################################################################
 p6_cirrus_sg_instance_ssh_create() {
-    local vpc_id=${1:-$AWS_VPC}
+    local vpc_id=${1:-$AWS_VPC_ID}
 
     local sg_instance_ssh_id=$(p6_aws_ec2_security_group_create "'Allows SSH TPC(22) Inbound From Bastion Only'" "vpc-ssh" --vpc-id $vpc_id --output text)
 
@@ -67,10 +67,10 @@ p6_cirrus_sg_instance_ssh_create() {
 ######################################################################
 #<
 #
-# Function: str sg_outbound_id = p6_cirrus_sg_outbound_ssh_create([vpc_id=$AWS_VPC])
+# Function: str sg_outbound_id = p6_cirrus_sg_outbound_ssh_create([vpc_id=$AWS_VPC_ID])
 #
 #  Args:
-#	OPTIONAL vpc_id - [$AWS_VPC]
+#	OPTIONAL vpc_id - [$AWS_VPC_ID]
 #
 #  Returns:
 #	str - sg_outbound_id
@@ -78,7 +78,7 @@ p6_cirrus_sg_instance_ssh_create() {
 #>
 ######################################################################
 p6_cirrus_sg_outbound_ssh_create() {
-    local vpc_id=${1:-$AWS_VPC}
+    local vpc_id=${1:-$AWS_VPC_ID}
 
     local sg_outbound_id=$(p6_aws_ec2_security_group_create "'Allows All TCP Outbound to ALL'" "outbound" --vpc-id $vpc_id --output text)
 

@@ -19,13 +19,15 @@ p6_cirrus_instance_create() {
     local user_data="${4:-}"
     local subnet_type="${5:-infra}"
 
-    [ -z "$ami_id" ] && ami_id=$(p6_cirrus_amis_freebsd12_latest)
-    [ -n "$user_data" ] && user_data="--user-data=$user_data"
-
-    local key_name=$(p6_cirrus_key_pair_make "$USER")
+    p6_string_blank "$ami_id" && ami_id=$(p6_cirrus_amis_freebsd12_latest)
+    p6_string_blank "$user_data" && user_data="--user-data=$user_data"
 
     local sg_id
+    local sg_outbound_id
     local subnet_id
+    local key_name
+    key_name=$(p6_cirrus_key_pair_make "$USER")
+
     case $name in
     bastion)
         sg_id=$(p6_cirrus_sg_id_from_group_name "bastion-ssh")
@@ -33,20 +35,20 @@ p6_cirrus_instance_create() {
         ;;
     *)
         sg_id=$(p6_cirrus_sg_id_from_group_name "vpc-ssh")
-        subnet_id=$(p6_cirrus_subnet_${subnet_type}_get)
+        subnet_id=$(p6_cirrus_subnet_"${subnet_type}"_get)
         ;;
     esac
 
-    local sg_outbound_id=$(p6_cirrus_sg_id_from_group_name "outbound")
+    sg_outbound_id=$(p6_cirrus_sg_id_from_group_name "outbound")
 
     p6_aws_ec2_instances_run \
         --output json \
-        --key-name $key_name \
-        --image-id $ami_id \
-        --instance-type $instance_type \
-        --security-group-ids $sg_id $sg_outbound_id \
-        --subnet-id $subnet_id \
-        $user_data \
+        --key-name "$key_name" \
+        --image-id "$ami_id" \
+        --instance-type "$instance_type" \
+        --security-group-ids "$sg_id" "$sg_outbound_id" \
+        --subnet-id "$subnet_id" \
+        "$user_data" \
         --tag-specifications "'ResourceType=instance,Tags=[{Key=Name,Value=$name}]'"
 }
 
@@ -59,7 +61,7 @@ p6_cirrus_instance_create() {
 ######################################################################
 p6_cirrus_instance_ubuntu18_create() {
 
-    p6_cirrus_instance_create "ubuntu18"
+    p6_cirrus_instance_create "ubuntu20"
 }
 
 ######################################################################
@@ -107,7 +109,8 @@ p6_cirrus_instance_bastion_create() {
 ######################################################################
 p6_cirrus_instance_irc_create() {
 
-    local ami_id=$(p6_cirrus_amis_freebsd12_latest)
+    local ami_id
+    ami_id=$(p6_aws_svc_ec2_amis_freebsd13_latest)
     p6_cirrus_instance_create "irc" "$ami_id" "t2.micro"
 }
 
@@ -120,6 +123,7 @@ p6_cirrus_instance_irc_create() {
 ######################################################################
 p6_cirrus_instance_jenkins_create() {
 
-    local ami_id=$(p6_cirrus_amis_freebsd12_latest)
+    local ami_id
+    ami_id=$(p6_aws_svc_ec2_amis_freebsd13_latest)
     p6_cirrus_instance_create "jenkins" "$ami_id" "m4.large"
 }
