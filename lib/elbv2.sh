@@ -1,19 +1,19 @@
 ######################################################################
 #<
 #
-# Function: p6_aws_svc_alb_create(alb_name, [subnet_type=Public], [vpc_id=$AWS_VPC_ID])
+# Function: p6_aws_svc_alb_create(alb_name, [subnet_type=Public], [vpc_id=$AWS_VPC_ID_ID])
 #
 #  Args:
 #	alb_name -
 #	OPTIONAL subnet_type - [Public]
-#	OPTIONAL vpc_id - [$AWS_VPC_ID]
+#	OPTIONAL vpc_id - [$AWS_VPC_ID_ID]
 #
 #>
 ######################################################################
 p6_aws_svc_alb_create() {
     local alb_name="$1"
     local subnet_type="${2:-Public}"
-    local vpc_id="${3:-$AWS_VPC_ID}"
+    local vpc_id="${3:-$AWS_VPC_ID_ID}"
 
     local subnet_ids=$(p6_aws_svc_ec2_subnet_ids_get "$subnet_type" "$vpc_id" | xargs)
 
@@ -53,17 +53,17 @@ p6_aws_svc_alb_listener_create() {
 ######################################################################
 #<
 #
-# Function: p6_aws_svc_alb_target_group_create(tg_name, [vpc_id=AWS_VPC_ID])
+# Function: p6_aws_svc_alb_target_group_create(tg_name, [vpc_id=AWS_VPC_ID_ID])
 #
 #  Args:
 #	tg_name -
-#	OPTIONAL vpc_id - [AWS_VPC_ID]
+#	OPTIONAL vpc_id - [AWS_VPC_ID_ID]
 #
 #>
 ######################################################################
 p6_aws_svc_alb_target_group_create() {
     local tg_name="$1"
-    local vpc_id="${2:-AWS_VPC_ID}"
+    local vpc_id="${2:-AWS_VPC_ID_ID}"
 
     if [ -n "$vpc_id" ]; then
         vpc_id="--vpc-id $vpc_id"

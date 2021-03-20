@@ -52,14 +52,14 @@
 
 #### ../p6-cirrus/lib/autoscaling.sh:
 
-- p6_cirrus_autoscaling_asg_create(asg_name, min_size, max_size, desired_capacity, lt_id, lt_name, lt_version, subnet_type, [vpc_id=$AWS_VPC])
+- p6_cirrus_autoscaling_asg_create(asg_name, min_size, max_size, desired_capacity, lt_id, lt_name, lt_version, subnet_type, [vpc_id=$AWS_VPC_ID])
 
 #### ../p6-cirrus/lib/ec2.sh:
 
 - p6_cirrus_ec2_launch_template_create(lt_name, ami_id, [instance_type=t3a.nano], sg_ids, key_name)
 - p6_cirrus_ec2_sg_delete(group_name)
 - str instance_id = p6_cirrus_ec2_instance_create(name, ami_id, [instance_type=t3a.nano], sg_ids, subnet_id, key_name, [user_data=])
-- str sg_id = p6_cirrus_ec2_sg_create(desc, tag_name, [vpc_id=$AWS_VPC])
+- str sg_id = p6_cirrus_ec2_sg_create(desc, tag_name, [vpc_id=$AWS_VPC_ID])
 
 #### ../p6-cirrus/lib/eks.sh:
 
@@ -67,7 +67,13 @@
 
 #### ../p6-cirrus/lib/elb.sh:
 
-- p6_cirrus_elb_create(elb_name, [listeners=http], [subnet_type=Public], [vpc_id=$AWS_VPC])
+- p6_cirrus_elb_create(elb_name, [listeners=http], [subnet_type=Public], [vpc_id=$AWS_VPC_ID])
+
+#### ../p6-cirrus/lib/elbv2.sh:
+
+- p6_aws_svc_alb_create(alb_name, [subnet_type=Public], [vpc_id=$AWS_VPC_ID_ID])
+- p6_aws_svc_alb_listener_create(alb_arn, target_group_arn)
+- p6_aws_svc_alb_target_group_create(tg_name, [vpc_id=AWS_VPC_ID_ID])
 
 #### ../p6-cirrus/lib/iam.sh:
 
@@ -112,9 +118,9 @@
 - p6_cirrus_sg_link_bastion_world_ssh()
 - p6_cirrus_sg_link_outbound_world_world()
 - p6_cirrus_sg_myself_allow(sg_name, [port=443])
-- str sg_bastion_ssh_id = p6_cirrus_sg_bastion_ssh_create([vpc_id=$AWS_VPC])
-- str sg_instance_ssh_id = p6_cirrus_sg_instance_ssh_create([vpc_id=$AWS_VPC])
-- str sg_outbound_id = p6_cirrus_sg_outbound_ssh_create([vpc_id=$AWS_VPC])
+- str sg_bastion_ssh_id = p6_cirrus_sg_bastion_ssh_create([vpc_id=$AWS_VPC_ID])
+- str sg_instance_ssh_id = p6_cirrus_sg_instance_ssh_create([vpc_id=$AWS_VPC_ID])
+- str sg_outbound_id = p6_cirrus_sg_outbound_ssh_create([vpc_id=$AWS_VPC_ID])
 
 #### ../p6-cirrus/lib/util.sh:
 
@@ -129,7 +135,7 @@
 ├── ec2.sh
 ├── eks.sh
 ├── elb.sh
-├── elbv2
+├── elbv2.sh
 ├── iam.sh
 ├── instance.sh
 ├── kms.sh

@@ -105,12 +105,12 @@ p6_cirrus_ec2_sg_delete() {
 ######################################################################
 #<
 #
-# Function: str sg_id = p6_cirrus_ec2_sg_create(desc, tag_name, [vpc_id=$AWS_VPC])
+# Function: str sg_id = p6_cirrus_ec2_sg_create(desc, tag_name, [vpc_id=$AWS_VPC_ID])
 #
 #  Args:
 #	desc -
 #	tag_name -
-#	OPTIONAL vpc_id - [$AWS_VPC]
+#	OPTIONAL vpc_id - [$AWS_VPC_ID]
 #
 #  Returns:
 #	str - sg_id
@@ -120,7 +120,7 @@ p6_cirrus_ec2_sg_delete() {
 p6_cirrus_ec2_sg_create() {
 	local desc="$1"
 	local tag_name="$2"
-	local vpc_id=${3:-$AWS_VPC}
+	local vpc_id=${3:-$AWS_VPC_ID}
 
 	local group_name=$tag_name
 	local sg_id

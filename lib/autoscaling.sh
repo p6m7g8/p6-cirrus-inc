@@ -1,7 +1,7 @@
 ######################################################################
 #<
 #
-# Function: p6_cirrus_autoscaling_asg_create(asg_name, min_size, max_size, desired_capacity, lt_id, lt_name, lt_version, subnet_type, [vpc_id=$AWS_VPC])
+# Function: p6_cirrus_autoscaling_asg_create(asg_name, min_size, max_size, desired_capacity, lt_id, lt_name, lt_version, subnet_type, [vpc_id=$AWS_VPC_ID])
 #
 #  Args:
 #	asg_name -
@@ -12,7 +12,7 @@
 #	lt_name -
 #	lt_version -
 #	subnet_type -
-#	OPTIONAL vpc_id - [$AWS_VPC]
+#	OPTIONAL vpc_id - [$AWS_VPC_ID]
 #
 #>
 ######################################################################
@@ -25,7 +25,7 @@ p6_cirrus_autoscaling_asg_create() {
     local lt_name="$6"
     local lt_version="$7"
     local subnet_type="$8"
-    local vpc_id="${9:-$AWS_VPC}"
+    local vpc_id="${9:-$AWS_VPC_ID}"
 
     local subnet_ids=$(p6_cirrus_ec2_subnet_ids_get "$subnet_type" "$vpc_id" | xargs | sed -e 's/ /,/g')
 
