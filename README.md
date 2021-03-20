@@ -50,6 +50,32 @@
 
 ### ../p6-cirrus/lib:
 
+#### ../p6-cirrus/lib/autoscaling.sh:
+
+- p6_cirrus_autoscaling_asg_create(asg_name, min_size, max_size, desired_capacity, lt_id, lt_name, lt_version, subnet_type, [vpc_id=$AWS_VPC])
+
+#### ../p6-cirrus/lib/ec2.sh:
+
+- p6_cirrus_ec2_launch_template_create(lt_name, ami_id, [instance_type=t3a.nano], sg_ids, key_name)
+- p6_cirrus_ec2_sg_delete(group_name)
+- str instance_id = p6_cirrus_ec2_instance_create(name, ami_id, [instance_type=t3a.nano], sg_ids, subnet_id, key_name, [user_data=])
+- str sg_id = p6_cirrus_ec2_sg_create(desc, tag_name, [vpc_id=$AWS_VPC])
+
+#### ../p6-cirrus/lib/eks.sh:
+
+- p6_cirrus_eks_cluster_logging_enable([cluster_name=$AWS_EKS_CLUSTER_NAME])
+
+#### ../p6-cirrus/lib/elb.sh:
+
+- p6_cirrus_elb_create(elb_name, [listeners=http], [subnet_type=Public], [vpc_id=$AWS_VPC])
+
+#### ../p6-cirrus/lib/iam.sh:
+
+- p6_cirrus_iam_password_policy_default()
+- p6_cirrus_iam_policy_create(policy_full_path, policy_description, policy_document)
+- p6_cirrus_iam_policy_to_role(role_full_path, policy_arn)
+- p6_cirrus_iam_role_saml_create(role_full_path, policy_arn, account_id, provider)
+
 #### ../p6-cirrus/lib/instance.sh:
 
 - p6_cirrus_instance_amazon_create()
@@ -62,7 +88,23 @@
 
 #### ../p6-cirrus/lib/kms.sh:
 
+- p6_cirrus_kms_key_create(key_description, key_policy)
 - str key_id = p6_cirrus_kms_key_make(account_id, key_description, key_alias)
+
+#### ../p6-cirrus/lib/lambda.sh:
+
+- p6_cirrus_lambda_invoke(function_name, ...)
+
+#### ../p6-cirrus/lib/organizations.sh:
+
+- aws_account_id account_id = p6_cirrus_organizations_avm_account_create(account_name, account_email)
+- bool bool = p6_cirrus_organizations_avm_account_create_wait_for(cas_id)
+- p6_cirrus_organizations_avm_account_create_stop(status, cas_id)
+- str status = p6_cirrus_organizations_avm_account_create_status(car_id)
+
+#### ../p6-cirrus/lib/s3api.sh:
+
+- false  = p6_cirrus_s3api_bucket_delete_with_versioned_objects(bucket)
 
 #### ../p6-cirrus/lib/sg.sh:
 
@@ -83,12 +125,21 @@
 ## Hier
 ```text
 .
+├── autoscaling.sh
+├── ec2.sh
+├── eks.sh
+├── elb.sh
+├── elbv2
+├── iam.sh
 ├── instance.sh
 ├── kms.sh
+├── lambda.sh
+├── organizations.sh
+├── s3api.sh
 ├── sg.sh
 └── util.sh
 
-0 directories, 4 files
+0 directories, 13 files
 ```
 ## Author
 
