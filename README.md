@@ -104,6 +104,7 @@
 
 #### ec2/instance.sh:
 
+- p6_cirrus_instance_allow(instance_id)
 - p6_cirrus_instance_amazon_create()
 - p6_cirrus_instance_bastion_create()
 - p6_cirrus_instance_create(name, ami_id, [instance_type=t3a.nano], [user_data=], [subnet_type=infra])
@@ -118,15 +119,8 @@
 
 #### ec2/sg.sh:
 
-- p6_cirrus_ec2_sg_delete(group_name)
-- p6_cirrus_sg_link_bastion_vpc_ssh()
-- p6_cirrus_sg_link_bastion_world_ssh()
-- p6_cirrus_sg_link_outbound_world_world()
-- p6_cirrus_sg_myself_allow(sg_name, [port=443])
-- str sg_bastion_ssh_id = p6_cirrus_sg_bastion_ssh_create([vpc_id=$AWS_VPC_ID])
-- str sg_id = p6_cirrus_ec2_sg_create(desc, tag_name, [vpc_id=$AWS_VPC_ID])
-- str sg_instance_ssh_id = p6_cirrus_sg_instance_ssh_create([vpc_id=$AWS_VPC_ID])
-- str sg_outbound_id = p6_cirrus_sg_outbound_ssh_create([vpc_id=$AWS_VPC_ID])
+- p6_cirrus_sg_allow()
+- str sg_id = p6_cirrus_sg_id_from_instance_id(instance_id)
 
 
 

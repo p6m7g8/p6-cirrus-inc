@@ -1,6 +1,28 @@
 ######################################################################
 #<
 #
+# Function: p6_cirrus_instance_allow(instance_id)
+#
+#  Args:
+#	instance_id -
+#
+#  Depends:	 p6_aws
+#>
+######################################################################
+p6_cirrus_instance_allow() {
+    local instance_id="$1"
+
+    local sg_id
+    sg_id=$(p6_cirrus_sg_id_from_instance_id "$instance_id")
+
+    p6_cirrus_sg_allow "$sg_id"
+
+    p6_return_void
+}
+
+######################################################################
+#<
+#
 # Function: p6_cirrus_instance_create(name, ami_id, [instance_type=t3a.nano], [user_data=], [subnet_type=infra])
 #
 #  Args:

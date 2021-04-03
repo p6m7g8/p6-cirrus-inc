@@ -10,6 +10,7 @@
 #  Returns:
 #	aws_account_id - account_id
 #
+#  Depends:	 p6_die
 #>
 ######################################################################
 p6_cirrus_organizations_avm_account_create() {
@@ -37,7 +38,7 @@ p6_cirrus_organizations_avm_account_create() {
 #  Returns:
 #	bool - bool
 #
-#  Depends:	 p6_run
+#  Depends:	 p6_aws p6_run
 #>
 ######################################################################
 p6_cirrus_organizations_avm_account_create_wait_for() {
@@ -61,7 +62,7 @@ p6_cirrus_organizations_avm_account_create_wait_for() {
 #	status -
 #	cas_id -
 #
-#  Depends:	 p6_die
+#  Depends:	 p6_aws p6_die
 #  Environment:	 ACTIVE FAILED
 #>
 ######################################################################
