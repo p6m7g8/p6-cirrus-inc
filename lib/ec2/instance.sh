@@ -10,6 +10,8 @@
 #	OPTIONAL user_data - []
 #	OPTIONAL subnet_type - [infra]
 #
+#  Depends:	 p6_aws p6_string
+#  Environment:	 USER
 #>
 ######################################################################
 p6_cirrus_instance_create() {
