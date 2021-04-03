@@ -8,6 +8,8 @@
 #	OPTIONAL subnet_type - [Public]
 #	OPTIONAL vpc_id - [$AWS_VPC_ID_ID]
 #
+#  Depends:	 p6_aws
+#  Environment:	 AWS_VPC_ID_ID XXX
 #>
 ######################################################################
 p6_aws_svc_alb_create() {
@@ -33,6 +35,8 @@ p6_aws_svc_alb_create() {
 #	alb_arn -
 #	target_group_arn -
 #
+#  Depends:	 p6_aws
+#  Environment:	 HTTP
 #>
 ######################################################################
 p6_aws_svc_alb_listener_create() {
@@ -59,6 +63,8 @@ p6_aws_svc_alb_listener_create() {
 #	tg_name -
 #	OPTIONAL vpc_id - [AWS_VPC_ID_ID]
 #
+#  Depends:	 p6_aws
+#  Environment:	 AWS_VPC_ID_ID HTTP
 #>
 ######################################################################
 p6_aws_svc_alb_target_group_create() {

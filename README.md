@@ -54,13 +54,6 @@
 
 - p6_cirrus_autoscaling_asg_create(asg_name, min_size, max_size, desired_capacity, lt_id, lt_name, lt_version, subnet_type, [vpc_id=$AWS_VPC_ID])
 
-#### ../p6-cirrus/lib/ec2.sh:
-
-- p6_cirrus_ec2_launch_template_create(lt_name, ami_id, [instance_type=t3a.nano], sg_ids, key_name)
-- p6_cirrus_ec2_sg_delete(group_name)
-- str instance_id = p6_cirrus_ec2_instance_create(name, ami_id, [instance_type=t3a.nano], sg_ids, subnet_id, key_name, [user_data=])
-- str sg_id = p6_cirrus_ec2_sg_create(desc, tag_name, [vpc_id=$AWS_VPC_ID])
-
 #### ../p6-cirrus/lib/eks.sh:
 
 - p6_cirrus_eks_cluster_logging_enable([cluster_name=$AWS_EKS_CLUSTER_NAME])
@@ -82,16 +75,6 @@
 - p6_cirrus_iam_policy_to_role(role_full_path, policy_arn)
 - p6_cirrus_iam_role_saml_create(role_full_path, policy_arn, account_id, provider)
 
-#### ../p6-cirrus/lib/instance.sh:
-
-- p6_cirrus_instance_amazon_create()
-- p6_cirrus_instance_bastion_create()
-- p6_cirrus_instance_create(name, ami_id, [instance_type=t3a.nano], [user_data=], [subnet_type=infra])
-- p6_cirrus_instance_irc_create()
-- p6_cirrus_instance_jenkins_create()
-- p6_cirrus_instance_rhel8_create()
-- p6_cirrus_instance_ubuntu18_create()
-
 #### ../p6-cirrus/lib/kms.sh:
 
 - p6_cirrus_kms_key_create(key_description, key_policy)
@@ -112,19 +95,38 @@
 
 - false  = p6_cirrus_s3api_bucket_delete_with_versioned_objects(bucket)
 
-#### ../p6-cirrus/lib/sg.sh:
+#### ../p6-cirrus/lib/util.sh:
 
+- p6_cirrus_cleanup()
+
+
+### ec2:
+
+#### ec2/instance.sh:
+
+- p6_cirrus_instance_amazon_create()
+- p6_cirrus_instance_bastion_create()
+- p6_cirrus_instance_create(name, ami_id, [instance_type=t3a.nano], [user_data=], [subnet_type=infra])
+- p6_cirrus_instance_irc_create()
+- p6_cirrus_instance_jenkins_create()
+- p6_cirrus_instance_rhel8_create()
+- p6_cirrus_instance_ubuntu18_create()
+
+#### ec2/lt.sh:
+
+- p6_cirrus_ec2_launch_template_create(lt_name, ami_id, [instance_type=t3a.nano], sg_ids, key_name)
+
+#### ec2/sg.sh:
+
+- p6_cirrus_ec2_sg_delete(group_name)
 - p6_cirrus_sg_link_bastion_vpc_ssh()
 - p6_cirrus_sg_link_bastion_world_ssh()
 - p6_cirrus_sg_link_outbound_world_world()
 - p6_cirrus_sg_myself_allow(sg_name, [port=443])
 - str sg_bastion_ssh_id = p6_cirrus_sg_bastion_ssh_create([vpc_id=$AWS_VPC_ID])
+- str sg_id = p6_cirrus_ec2_sg_create(desc, tag_name, [vpc_id=$AWS_VPC_ID])
 - str sg_instance_ssh_id = p6_cirrus_sg_instance_ssh_create([vpc_id=$AWS_VPC_ID])
 - str sg_outbound_id = p6_cirrus_sg_outbound_ssh_create([vpc_id=$AWS_VPC_ID])
-
-#### ../p6-cirrus/lib/util.sh:
-
-- p6_cirrus_cleanup()
 
 
 
@@ -132,20 +134,21 @@
 ```text
 .
 ├── autoscaling.sh
-├── ec2.sh
+├── ec2
+│   ├── instance.sh
+│   ├── lt.sh
+│   └── sg.sh
 ├── eks.sh
 ├── elb.sh
 ├── elbv2.sh
 ├── iam.sh
-├── instance.sh
 ├── kms.sh
 ├── lambda.sh
 ├── organizations.sh
 ├── s3api.sh
-├── sg.sh
 └── util.sh
 
-0 directories, 13 files
+1 directory, 13 files
 ```
 ## Author
 

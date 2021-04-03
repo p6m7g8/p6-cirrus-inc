@@ -6,6 +6,8 @@
 #  Args:
 #	OPTIONAL cluster_name - [$AWS_EKS_CLUSTER_NAME]
 #
+#  Depends:	 p6_aws
+#  Environment:	 AWS_EKS_CLUSTER_NAME
 #>
 ######################################################################
 p6_cirrus_eks_cluster_logging_enable() {

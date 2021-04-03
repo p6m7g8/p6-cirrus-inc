@@ -37,6 +37,7 @@ p6_cirrus_organizations_avm_account_create() {
 #  Returns:
 #	bool - bool
 #
+#  Depends:	 p6_run
 #>
 ######################################################################
 p6_cirrus_organizations_avm_account_create_wait_for() {
@@ -60,6 +61,8 @@ p6_cirrus_organizations_avm_account_create_wait_for() {
 #	status -
 #	cas_id -
 #
+#  Depends:	 p6_die
+#  Environment:	 ACTIVE FAILED
 #>
 ######################################################################
 p6_cirrus_organizations_avm_account_create_stop() {
@@ -83,6 +86,7 @@ p6_cirrus_organizations_avm_account_create_stop() {
 #  Returns:
 #	str - status
 #
+#  Depends:	 p6_aws
 #>
 ######################################################################
 p6_cirrus_organizations_avm_account_create_status() {
