@@ -10,7 +10,7 @@
 #  Returns:
 #	aws_account_id - account_id
 #
-#  Depends:	 p6_die
+#  Depends:	 p6_aws
 #>
 ######################################################################
 p6_cirrus_organizations_avm_account_create() {

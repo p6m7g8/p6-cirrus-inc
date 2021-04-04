@@ -100,6 +100,28 @@
 - p6_cirrus_cleanup()
 
 
+### alfred:
+
+#### alfred/bastion.sh:
+
+- p6_cirrus_alfred_bastion_private(pfunc)
+- p6_cirrus_alfred_bastion_public(pfunc)
+
+#### alfred/browser.sh:
+
+- p6_cirrus_alfred_browser_console(pfunc)
+
+#### alfred/nodeps.sh:
+
+- p6_cirrus_alfred_profiles_list_q(org)
+- p6_cirrus_alfred_profiles_to_alred_items_q(org, ...)
+
+#### alfred/profile.sh:
+
+- str json = p6_cirrus_alfred_profiles_to_alred_items(org, ...)
+- words profiles = p6_cirrus_alfred_profiles_list(org)
+
+
 ### ec2:
 
 #### ec2/instance.sh:
@@ -123,10 +145,24 @@
 - str sg_id = p6_cirrus_sg_id_from_instance_id(instance_id)
 
 
+### ssh:
+
+#### ssh/connect.sh:
+
+- p6_cirrus_ssh_connect_jump(tag)
+- p6_cirrus_ssh_connect_private(tag)
+- p6_cirrus_ssh_connect_public()
+
+
 
 ## Hier
 ```text
 .
+├── alfred
+│   ├── bastion.sh
+│   ├── browser.sh
+│   ├── nodeps.sh
+│   └── profile.sh
 ├── autoscaling.sh
 ├── ec2
 │   ├── instance.sh
@@ -140,9 +176,11 @@
 ├── lambda.sh
 ├── organizations.sh
 ├── s3api.sh
+├── ssh
+│   └── connect.sh
 └── util.sh
 
-1 directory, 13 files
+3 directories, 18 files
 ```
 ## Author
 
